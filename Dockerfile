@@ -1,4 +1,4 @@
-FROM microsoft/dotnet:2.1-sdk AS build
+FROM microsoft/dotnet:2.1-sdk-alpine3.7 AS build
 WORKDIR /app
 
 # Copy everything else and build
@@ -10,7 +10,7 @@ WORKDIR /app/sample
 RUN dotnet publish -c Release -o ../out
 
 # Runtime image
-FROM microsoft/dotnet:2.1-runtime
+FROM microsoft/dotnet:2.1-runtime-alpine
 WORKDIR /app
 COPY --from=build /app/out .
 
